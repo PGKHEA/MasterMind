@@ -1,4 +1,5 @@
 import java.awt.BorderLayout;
+import java.awt.Button;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Frame;
@@ -18,6 +19,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JTable;
 
 import java.awt.Dimension;
+import java.util.Random;
 
 
 public class gameBoard extends JFrame {
@@ -27,13 +29,16 @@ public class gameBoard extends JFrame {
 	private static gameBoard frame;
 	final JPanel panel_1;
 	final JPanel panel;
-	private JLabel lblR8G1;
 	private int round = 0;
 	private int guessOne = 0;
 	private int guessTwo = 0;
 	private int guessThree = 0;
 	private int guessFour = 0;
 	Color brown = new Color(139,69,19);
+	Game game;
+	private String[] labelArray = new String[4];
+
+	
 
 	/**
 	 * Launch the application.
@@ -57,13 +62,14 @@ public class gameBoard extends JFrame {
 	 * Create the frame.
 	 */
 	public gameBoard() {
+		
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 633);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
 				
 				panel_1 = new JPanel();
 				panel_1.setBounds(0, 0, 434, 601);
@@ -1412,230 +1418,134 @@ public class gameBoard extends JFrame {
 						panel_1.add(btnR1G4);
 						
 						JButton btnCheck = new JButton("Check");
-						btnCheck.addActionListener(new ActionListener() {
-							public void actionPerformed(ActionEvent e) {
-								
-								guessOne = 0;
-								guessTwo = 0;
-								guessThree = 0;
-								guessFour = 0;
-								
-								switch(round){
-								case 0:
-									btnR1G1.setEnabled(false);
-									btnR1G2.setEnabled(false);
-									btnR1G3.setEnabled(false);
-									btnR1G4.setEnabled(false);
-									
-									btnR2G1.setEnabled(true);
-									btnR2G2.setEnabled(true);
-									btnR2G3.setEnabled(true);
-									btnR2G4.setEnabled(true);
-									break;
-								case 1:
-									btnR2G1.setEnabled(false);
-									btnR2G2.setEnabled(false);
-									btnR2G3.setEnabled(false);
-									btnR2G4.setEnabled(false);
-									
-									btnR3G1.setEnabled(true);
-									btnR3G2.setEnabled(true);
-									btnR3G3.setEnabled(true);
-									btnR3G4.setEnabled(true);
-									break;
-								case 2:
-									btnR3G1.setEnabled(false);
-									btnR3G2.setEnabled(false);
-									btnR3G3.setEnabled(false);
-									btnR3G4.setEnabled(false);
-									
-									btnR4G1.setEnabled(true);
-									btnR4G2.setEnabled(true);
-									btnR4G3.setEnabled(true);
-									btnR4G4.setEnabled(true);
-									break;
-								case 3:
-									btnR4G1.setEnabled(false);
-									btnR4G2.setEnabled(false);
-									btnR4G3.setEnabled(false);
-									btnR4G4.setEnabled(false);
-									
-									btnR5G1.setEnabled(true);
-									btnR5G2.setEnabled(true);
-									btnR5G3.setEnabled(true);
-									btnR5G4.setEnabled(true);
-									break;
-								case 4:
-									btnR5G1.setEnabled(false);
-									btnR5G2.setEnabled(false);
-									btnR5G3.setEnabled(false);
-									btnR5G4.setEnabled(false);
-									
-									btnR6G1.setEnabled(true);
-									btnR6G2.setEnabled(true);
-									btnR6G3.setEnabled(true);
-									btnR6G4.setEnabled(true);
-									break;
-								case 5:
-									btnR6G1.setEnabled(false);
-									btnR6G2.setEnabled(false);
-									btnR6G3.setEnabled(false);
-									btnR6G4.setEnabled(false);
-									
-									btnR7G1.setEnabled(true);
-									btnR7G2.setEnabled(true);
-									btnR7G3.setEnabled(true);
-									btnR7G4.setEnabled(true);
-									break;
-								case 6:
-									btnR7G1.setEnabled(false);
-									btnR7G2.setEnabled(false);
-									btnR7G3.setEnabled(false);
-									btnR7G4.setEnabled(false);
-									
-									btnR8G1.setEnabled(true);
-									btnR8G2.setEnabled(true);
-									btnR8G3.setEnabled(true);
-									btnR8G4.setEnabled(true);
-									break;
-								default:
-									btnR8G1.setEnabled(false);
-									btnR8G2.setEnabled(false);
-									btnR8G3.setEnabled(false);
-									btnR8G4.setEnabled(false);
-										
-								}
-								round += 1;
-							}
-						});
 						btnCheck.setBounds(184, 514, 89, 23);
 						panel_1.add(btnCheck);
 						
-						lblR8G1 = new JLabel("");
+						final JLabel lblR8G1 = new JLabel("");
 						lblR8G1.setBounds(337, 70, 15, 14);
 						panel_1.add(lblR8G1);
 						
-						JLabel lblR8G2 = new JLabel("");
+						final JLabel lblR8G2 = new JLabel("");
 						lblR8G2.setBounds(362, 70, 15, 14);
 						panel_1.add(lblR8G2);
 						
-						JLabel lblR8G3 = new JLabel("");
+						final JLabel lblR8G3 = new JLabel("");
 						lblR8G3.setBounds(337, 83, 15, 14);
 						panel_1.add(lblR8G3);
 						
-						JLabel lblR8G4 = new JLabel("");
+						final JLabel lblR8G4 = new JLabel("");
 						lblR8G4.setBounds(362, 83, 15, 14);
 						panel_1.add(lblR8G4);
 						
-						JLabel lblR7G1 = new JLabel("");
+						final JLabel lblR7G1 = new JLabel("");
 						lblR7G1.setBounds(337, 121, 15, 14);
 						panel_1.add(lblR7G1);
 						
-						JLabel lblR7G2 = new JLabel("");
+						final JLabel lblR7G2 = new JLabel("");
 						lblR7G2.setBounds(362, 121, 15, 14);
 						panel_1.add(lblR7G2);
 						
-						JLabel lblR7G3 = new JLabel("");
+						final JLabel lblR7G3 = new JLabel("");
 						lblR7G3.setBounds(337, 134, 15, 14);
 						panel_1.add(lblR7G3);
 						
-						JLabel lblR7G4 = new JLabel("");
+						final JLabel lblR7G4 = new JLabel("");
 						lblR7G4.setBounds(362, 134, 15, 14);
 						panel_1.add(lblR7G4);
 						
-						JLabel lblR6G1 = new JLabel("");
+						final JLabel lblR6G1 = new JLabel("");
 						lblR6G1.setBounds(337, 175, 15, 14);
 						panel_1.add(lblR6G1);
 						
-						JLabel lblR6G2 = new JLabel("");
+						final JLabel lblR6G2 = new JLabel("");
 						lblR6G2.setBounds(362, 175, 15, 14);
 						panel_1.add(lblR6G2);
 						
-						JLabel lblR6G3 = new JLabel("");
+						final JLabel lblR6G3 = new JLabel("");
 						lblR6G3.setBounds(337, 188, 15, 14);
 						panel_1.add(lblR6G3);
 						
-						JLabel lblR6G4 = new JLabel("");
+						final JLabel lblR6G4 = new JLabel("");
 						lblR6G4.setBounds(362, 188, 15, 14);
 						panel_1.add(lblR6G4);
 						
-						JLabel lblR5G1 = new JLabel("");
+						final JLabel lblR5G1 = new JLabel("");
 						lblR5G1.setBounds(337, 226, 15, 14);
 						panel_1.add(lblR5G1);
 						
-						JLabel lblR5G2 = new JLabel("");
+						final JLabel lblR5G2 = new JLabel("");
 						lblR5G2.setBounds(362, 226, 15, 14);
 						panel_1.add(lblR5G2);
 						
-						JLabel lblR5G3 = new JLabel("");
+						final JLabel lblR5G3 = new JLabel("");
 						lblR5G3.setBounds(337, 239, 15, 14);
 						panel_1.add(lblR5G3);
 						
-						JLabel lblR5G4 = new JLabel("");
+						final JLabel lblR5G4 = new JLabel("");
 						lblR5G4.setBounds(362, 239, 15, 14);
 						panel_1.add(lblR5G4);
 						
-						JLabel lblR4G1 = new JLabel("");
+						final JLabel lblR4G1 = new JLabel("");
 						lblR4G1.setBounds(337, 277, 15, 14);
 						panel_1.add(lblR4G1);
 						
-						JLabel lblR4G2 = new JLabel("");
+						final JLabel lblR4G2 = new JLabel("");
 						lblR4G2.setBounds(362, 277, 15, 14);
 						panel_1.add(lblR4G2);
 						
-						JLabel lblR4G3 = new JLabel("");
+						final JLabel lblR4G3 = new JLabel("");
 						lblR4G3.setBounds(337, 290, 15, 14);
 						panel_1.add(lblR4G3);
 						
-						JLabel lblR4G4 = new JLabel("");
+						final JLabel lblR4G4 = new JLabel("");
 						lblR4G4.setBounds(362, 290, 15, 14);
 						panel_1.add(lblR4G4);
 						
-						JLabel lblR3G1 = new JLabel("");
+						final JLabel lblR3G1 = new JLabel("");
 						lblR3G1.setBounds(337, 328, 15, 14);
 						panel_1.add(lblR3G1);
 						
-						JLabel lblR3G2 = new JLabel("");
+						final JLabel lblR3G2 = new JLabel("");
 						lblR3G2.setBounds(362, 328, 15, 14);
 						panel_1.add(lblR3G2);
 						
-						JLabel lblR3G3 = new JLabel("");
+						final JLabel lblR3G3 = new JLabel("");
 						lblR3G3.setBounds(337, 341, 15, 14);
 						panel_1.add(lblR3G3);
 						
-						JLabel lblR3G4 = new JLabel("");
+						final JLabel lblR3G4 = new JLabel("");
 						lblR3G4.setBounds(362, 341, 15, 14);
 						panel_1.add(lblR3G4);
 						
-						JLabel lblR2G1 = new JLabel("");
+						final JLabel lblR2G1 = new JLabel("");
 						lblR2G1.setBounds(337, 380, 15, 14);
 						panel_1.add(lblR2G1);
 						
-						JLabel lblR2G2 = new JLabel("");
+						final JLabel lblR2G2 = new JLabel("");
 						lblR2G2.setBounds(362, 380, 15, 14);
 						panel_1.add(lblR2G2);
 						
-						JLabel lblR2G3 = new JLabel("");
+						final JLabel lblR2G3 = new JLabel("");
 						lblR2G3.setBounds(337, 393, 15, 14);
 						panel_1.add(lblR2G3);
 						
-						JLabel lblR2G4 = new JLabel("");
+						final JLabel lblR2G4 = new JLabel("");
 						lblR2G4.setBounds(362, 393, 15, 14);
 						panel_1.add(lblR2G4);
 						
-						JLabel lblR1G1 = new JLabel("");
+						final JLabel lblR1G1 = new JLabel("");
 						lblR1G1.setBounds(337, 431, 15, 14);
 						panel_1.add(lblR1G1);
 						
-						JLabel lblR1G2 = new JLabel("");
+						final JLabel lblR1G2 = new JLabel("");
 						lblR1G2.setBounds(362, 431, 15, 14);
 						panel_1.add(lblR1G2);
 						
-						JLabel lblR1G3 = new JLabel("");
+						final JLabel lblR1G3 = new JLabel("");
 						lblR1G3.setBounds(337, 444, 15, 14);
 						panel_1.add(lblR1G3);
 						
-						JLabel lblR1G4 = new JLabel("");
+						final JLabel lblR1G4 = new JLabel("");
 						lblR1G4.setBounds(362, 444, 15, 14);
 						panel_1.add(lblR1G4);
 		
@@ -1677,6 +1587,159 @@ public class gameBoard extends JFrame {
 					}
 				});
 				
+				btnCheck.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						game = new Game();
+						
+						switch(round){
+						case 0:
+							game.setColorArray(btnR1G1, btnR1G2, btnR1G3, btnR1G4);
+							labelArray = game.checkGuess();
+							lblR1G1.setText(labelArray[0]);
+							lblR1G2.setText(labelArray[1]);
+							lblR1G3.setText(labelArray[2]);
+							lblR1G4.setText(labelArray[3]);
+							
+							btnR1G1.setEnabled(false);
+							btnR1G2.setEnabled(false);
+							btnR1G3.setEnabled(false);
+							btnR1G4.setEnabled(false);
+							
+							btnR2G1.setEnabled(true);
+							btnR2G2.setEnabled(true);
+							btnR2G3.setEnabled(true);
+							btnR2G4.setEnabled(true);
+							break;
+						case 1:
+							game.setColorArray(btnR2G1, btnR2G2, btnR2G3, btnR2G4);
+							labelArray = game.checkGuess();
+							lblR2G1.setText(labelArray[0]);
+							lblR2G2.setText(labelArray[1]);
+							lblR2G3.setText(labelArray[2]);
+							lblR2G4.setText(labelArray[3]);
+							
+							btnR2G1.setEnabled(false);
+							btnR2G2.setEnabled(false);
+							btnR2G3.setEnabled(false);
+							btnR2G4.setEnabled(false);
+							
+							btnR3G1.setEnabled(true);
+							btnR3G2.setEnabled(true);
+							btnR3G3.setEnabled(true);
+							btnR3G4.setEnabled(true);
+							break;
+						case 2:
+							game.setColorArray(btnR3G1, btnR3G2, btnR3G3, btnR3G4);
+							labelArray = game.checkGuess();
+							lblR3G1.setText(labelArray[0]);
+							lblR3G2.setText(labelArray[1]);
+							lblR3G3.setText(labelArray[2]);
+							lblR3G4.setText(labelArray[3]);
+							
+							btnR3G1.setEnabled(false);
+							btnR3G2.setEnabled(false);
+							btnR3G3.setEnabled(false);
+							btnR3G4.setEnabled(false);
+							
+							btnR4G1.setEnabled(true);
+							btnR4G2.setEnabled(true);
+							btnR4G3.setEnabled(true);
+							btnR4G4.setEnabled(true);
+							break;
+						case 3:
+							game.setColorArray(btnR4G1, btnR4G2, btnR4G3, btnR4G4);
+							labelArray = game.checkGuess();
+							lblR4G1.setText(labelArray[0]);
+							lblR4G2.setText(labelArray[1]);
+							lblR4G3.setText(labelArray[2]);
+							lblR4G4.setText(labelArray[3]);
+							
+							btnR4G1.setEnabled(false);
+							btnR4G2.setEnabled(false);
+							btnR4G3.setEnabled(false);
+							btnR4G4.setEnabled(false);
+							
+							btnR5G1.setEnabled(true);
+							btnR5G2.setEnabled(true);
+							btnR5G3.setEnabled(true);
+							btnR5G4.setEnabled(true);
+							break;
+						case 4:
+							game.setColorArray(btnR5G1, btnR5G2, btnR5G3, btnR5G4);
+							labelArray = game.checkGuess();
+							lblR5G1.setText(labelArray[0]);
+							lblR5G2.setText(labelArray[1]);
+							lblR5G3.setText(labelArray[2]);
+							lblR5G4.setText(labelArray[3]);
+							
+							btnR5G1.setEnabled(false);
+							btnR5G2.setEnabled(false);
+							btnR5G3.setEnabled(false);
+							btnR5G4.setEnabled(false);
+							
+							btnR6G1.setEnabled(true);
+							btnR6G2.setEnabled(true);
+							btnR6G3.setEnabled(true);
+							btnR6G4.setEnabled(true);
+							break;
+						case 5:
+							game.setColorArray(btnR6G1, btnR6G2, btnR6G3, btnR6G4);
+							labelArray = game.checkGuess();
+							lblR6G1.setText(labelArray[0]);
+							lblR6G2.setText(labelArray[1]);
+							lblR6G3.setText(labelArray[2]);
+							lblR6G4.setText(labelArray[3]);
+							
+							btnR6G1.setEnabled(false);
+							btnR6G2.setEnabled(false);
+							btnR6G3.setEnabled(false);
+							btnR6G4.setEnabled(false);
+							
+							btnR7G1.setEnabled(true);
+							btnR7G2.setEnabled(true);
+							btnR7G3.setEnabled(true);
+							btnR7G4.setEnabled(true);
+							break;
+						case 6:
+							game.setColorArray(btnR7G1, btnR7G2, btnR7G3, btnR7G4);
+							labelArray = game.checkGuess();
+							lblR7G1.setText(labelArray[0]);
+							lblR7G2.setText(labelArray[1]);
+							lblR7G3.setText(labelArray[2]);
+							lblR7G4.setText(labelArray[3]);
+							
+							btnR7G1.setEnabled(false);
+							btnR7G2.setEnabled(false);
+							btnR7G3.setEnabled(false);
+							btnR7G4.setEnabled(false);
+							
+							btnR8G1.setEnabled(true);
+							btnR8G2.setEnabled(true);
+							btnR8G3.setEnabled(true);
+							btnR8G4.setEnabled(true);
+							break;
+						default:
+							game.setColorArray(btnR8G1, btnR8G2, btnR8G3, btnR8G4);
+							labelArray = game.checkGuess();
+							lblR8G1.setText(labelArray[0]);
+							lblR8G2.setText(labelArray[1]);
+							lblR8G3.setText(labelArray[2]);
+							lblR8G4.setText(labelArray[3]);
+							
+							btnR8G1.setEnabled(false);
+							btnR8G2.setEnabled(false);
+							btnR8G3.setEnabled(false);
+							btnR8G4.setEnabled(false);
+								
+						}
+						round += 1;
+					}
+				});
+
+				
 	}
 	
+
 }
+
+
