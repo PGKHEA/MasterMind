@@ -20,6 +20,7 @@ import javax.swing.JTable;
 
 import java.awt.Dimension;
 import java.util.Random;
+import javax.swing.SpinnerNumberModel;
 
 
 public class gameBoard extends JFrame {
@@ -30,12 +31,12 @@ public class gameBoard extends JFrame {
 	final JPanel panel_1;
 	final JPanel panel;
 	private int round = 0;
-	private int guessOne = 0;
-	private int guessTwo = 0;
-	private int guessThree = 0;
-	private int guessFour = 0;
-	Color brown = new Color(139,69,19);
-	Game game;
+	private int guessOne = 1;
+	private int guessTwo = 1;
+	private int guessThree = 1;
+	private int guessFour = 1;
+	//private Color brown = new Color(139,69,19);
+	Game game = new Game();
 	private String[] labelArray = new String[4];
 
 	
@@ -65,11 +66,52 @@ public class gameBoard extends JFrame {
 		
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 633);
+		setBounds(100, 100, 450, 292);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+				
+				panel = new JPanel();
+				panel.setBounds(0, 0, 434, 262);
+				contentPane.add(panel);
+				panel.setLayout(null);
+				
+				
+				
+				JLabel lblNumGames = new JLabel("How many games would you like to play?");
+				lblNumGames.setBounds(11, 75, 195, 14);
+				panel.add(lblNumGames);
+				
+				final JSpinner spinner = new JSpinner();
+				spinner.setModel(new SpinnerNumberModel(1, 1, 10, 1));
+				spinner.setBounds(229, 72, 29, 20);
+				panel.add(spinner);
+				
+				JButton btnSubmit = new JButton("Submit");
+				
+						btnSubmit.setBounds(345, 228, 79, 23);
+						panel.add(btnSubmit);
+						
+						tbxName = new JTextField();
+						tbxName.setBounds(11, 34, 86, 20);
+						panel.add(tbxName);
+						tbxName.setColumns(10);
+						
+						JLabel lblPlayerOneName = new JLabel("Player One Name:");
+						lblPlayerOneName.setBounds(10, 9, 87, 14);
+						panel.add(lblPlayerOneName);
+						
+						btnSubmit.addActionListener(new ActionListener() {
+							public void actionPerformed(ActionEvent e) {
+								game.setPlayerName(tbxName.getText());
+								game.setNumGames((Integer) spinner.getValue());
+								panel.setVisible(false);
+								panel_1.setVisible(true);
+								frame.setBounds(frame.getX(), frame.getY(), panel_1.getWidth(), panel_1.getHeight());
+								contentPane.setSize(panel_1.getWidth(), panel_1.getHeight());
+							}
+						});
 				
 				panel_1 = new JPanel();
 				panel_1.setBounds(0, 0, 434, 601);
@@ -77,28 +119,29 @@ public class gameBoard extends JFrame {
 				panel_1.setVisible(false);
 				panel_1.setLayout(null);
 				
-				JButton btnChoosen1 = new JButton("?");
+				final JButton btnChoosen1 = new JButton("?");
 				btnChoosen1.setSize(new Dimension(20, 20));
 				
 				btnChoosen1.setBounds(10, 11, 40, 40);
 				panel_1.add(btnChoosen1);
 				
-				JButton btnChoosen2 = new JButton("?");
+				final JButton btnChoosen2 = new JButton("?");
 				btnChoosen2.setSize(new Dimension(20, 20));
 				btnChoosen2.setBounds(103, 11, 40, 40);
 				panel_1.add(btnChoosen2);
 				
-				JButton btnChoosen3 = new JButton("?");
+				final JButton btnChoosen3 = new JButton("?");
 				btnChoosen3.setSize(new Dimension(20, 20));
 				btnChoosen3.setBounds(194, 11, 40, 40);
 				panel_1.add(btnChoosen3);
 				
-				JButton btnChoosen4 = new JButton("?");
+				final JButton btnChoosen4 = new JButton("?");
 				btnChoosen4.setSize(new Dimension(20, 20));
 				btnChoosen4.setBounds(287, 11, 40, 40);
 				panel_1.add(btnChoosen4);
 				
 				final JButton btnR8G1 = new JButton("");
+				btnR8G1.setBackground(Color.RED);
 				btnR8G1.setEnabled(false);
 				btnR8G1.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
@@ -116,7 +159,7 @@ public class gameBoard extends JFrame {
 							btnR8G1.setBackground(Color.YELLOW);
 							break;
 						case 4:
-							btnR8G1.setBackground(brown);
+							btnR8G1.setBackground(Color.PINK);
 							break;
 						case 5:
 							btnR8G1.setBackground(Color.ORANGE);
@@ -141,6 +184,7 @@ public class gameBoard extends JFrame {
 				panel_1.add(btnR8G1);
 				
 				final JButton btnR8G2 = new JButton("");
+				btnR8G2.setBackground(Color.RED);
 				btnR8G2.setEnabled(false);
 				btnR8G2.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
@@ -158,7 +202,7 @@ public class gameBoard extends JFrame {
 							btnR8G2.setBackground(Color.YELLOW);
 							break;
 						case 4:
-							btnR8G2.setBackground(brown);
+							btnR8G2.setBackground(Color.PINK);
 							break;
 						case 5:
 							btnR8G2.setBackground(Color.ORANGE);
@@ -182,6 +226,7 @@ public class gameBoard extends JFrame {
 				panel_1.add(btnR8G2);
 				
 				final JButton btnR8G3 = new JButton("");
+				btnR8G3.setBackground(Color.RED);
 				btnR8G3.setEnabled(false);
 				btnR8G3.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
@@ -199,7 +244,7 @@ public class gameBoard extends JFrame {
 							btnR8G3.setBackground(Color.YELLOW);
 							break;
 						case 4:
-							btnR8G3.setBackground(brown);
+							btnR8G3.setBackground(Color.PINK);
 							break;
 						case 5:
 							btnR8G3.setBackground(Color.ORANGE);
@@ -224,6 +269,7 @@ public class gameBoard extends JFrame {
 						panel_1.add(btnR8G3);
 						
 						final JButton btnR8G4 = new JButton("");
+						btnR8G4.setBackground(Color.RED);
 						btnR8G4.setEnabled(false);
 						btnR8G4.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent e) {
@@ -241,7 +287,7 @@ public class gameBoard extends JFrame {
 									btnR8G4.setBackground(Color.YELLOW);
 									break;
 								case 4:
-									btnR8G4.setBackground(brown);
+									btnR8G4.setBackground(Color.PINK);
 									break;
 								case 5:
 									btnR8G4.setBackground(Color.ORANGE);
@@ -264,6 +310,7 @@ public class gameBoard extends JFrame {
 						panel_1.add(btnR8G4);
 						
 						final JButton btnR7G1 = new JButton("");
+						btnR7G1.setBackground(Color.RED);
 						btnR7G1.setEnabled(false);
 						btnR7G1.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent e) {
@@ -281,7 +328,7 @@ public class gameBoard extends JFrame {
 									btnR7G1.setBackground(Color.YELLOW);
 									break;
 								case 4:
-									btnR7G1.setBackground(brown);
+									btnR7G1.setBackground(Color.PINK);
 									break;
 								case 5:
 									btnR7G1.setBackground(Color.ORANGE);
@@ -306,6 +353,7 @@ public class gameBoard extends JFrame {
 						panel_1.add(btnR7G1);
 						
 						final JButton btnR7G2 = new JButton("");
+						btnR7G2.setBackground(Color.RED);
 						btnR7G2.setEnabled(false);
 						btnR7G2.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent e) {
@@ -323,7 +371,7 @@ public class gameBoard extends JFrame {
 									btnR7G2.setBackground(Color.YELLOW);
 									break;
 								case 4:
-									btnR7G2.setBackground(brown);
+									btnR7G2.setBackground(Color.PINK);
 									break;
 								case 5:
 									btnR7G2.setBackground(Color.ORANGE);
@@ -347,6 +395,7 @@ public class gameBoard extends JFrame {
 						panel_1.add(btnR7G2);
 						
 						final JButton btnR7G3 = new JButton("");
+						btnR7G3.setBackground(Color.RED);
 						btnR7G3.setEnabled(false);
 						btnR7G3.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent e) {
@@ -364,7 +413,7 @@ public class gameBoard extends JFrame {
 									btnR7G3.setBackground(Color.YELLOW);
 									break;
 								case 4:
-									btnR7G3.setBackground(brown);
+									btnR7G3.setBackground(Color.PINK);
 									break;
 								case 5:
 									btnR7G3.setBackground(Color.ORANGE);
@@ -388,6 +437,7 @@ public class gameBoard extends JFrame {
 						panel_1.add(btnR7G3);
 						
 						final JButton btnR7G4 = new JButton("");
+						btnR7G4.setBackground(Color.RED);
 						btnR7G4.setEnabled(false);
 						btnR7G4.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent e) {
@@ -405,7 +455,7 @@ public class gameBoard extends JFrame {
 									btnR7G4.setBackground(Color.YELLOW);
 									break;
 								case 4:
-									btnR7G4.setBackground(brown);
+									btnR7G4.setBackground(Color.PINK);
 									break;
 								case 5:
 									btnR7G4.setBackground(Color.ORANGE);
@@ -429,6 +479,7 @@ public class gameBoard extends JFrame {
 						panel_1.add(btnR7G4);
 						
 						final JButton btnR6G1 = new JButton("");
+						btnR6G1.setBackground(Color.RED);
 						btnR6G1.setEnabled(false);
 						btnR6G1.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent e) {
@@ -446,7 +497,7 @@ public class gameBoard extends JFrame {
 									btnR6G1.setBackground(Color.YELLOW);
 									break;
 								case 4:
-									btnR6G1.setBackground(brown);
+									btnR6G1.setBackground(Color.PINK);
 									break;
 								case 5:
 									btnR6G1.setBackground(Color.ORANGE);
@@ -471,6 +522,7 @@ public class gameBoard extends JFrame {
 						panel_1.add(btnR6G1);
 						
 						final JButton btnR6G2 = new JButton("");
+						btnR6G2.setBackground(Color.RED);
 						btnR6G2.setEnabled(false);
 						btnR6G2.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent e) {
@@ -488,7 +540,7 @@ public class gameBoard extends JFrame {
 									btnR6G2.setBackground(Color.YELLOW);
 									break;
 								case 4:
-									btnR6G2.setBackground(brown);
+									btnR6G2.setBackground(Color.PINK);
 									break;
 								case 5:
 									btnR6G2.setBackground(Color.ORANGE);
@@ -512,6 +564,7 @@ public class gameBoard extends JFrame {
 						panel_1.add(btnR6G2);
 						
 						final JButton btnR6G3 = new JButton("");
+						btnR6G3.setBackground(Color.RED);
 						btnR6G3.setEnabled(false);
 						btnR6G3.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent e) {
@@ -529,7 +582,7 @@ public class gameBoard extends JFrame {
 									btnR6G3.setBackground(Color.YELLOW);
 									break;
 								case 4:
-									btnR6G3.setBackground(brown);
+									btnR6G3.setBackground(Color.PINK);
 									break;
 								case 5:
 									btnR6G3.setBackground(Color.ORANGE);
@@ -553,6 +606,7 @@ public class gameBoard extends JFrame {
 						panel_1.add(btnR6G3);
 						
 						final JButton btnR6G4 = new JButton("");
+						btnR6G4.setBackground(Color.RED);
 						btnR6G4.setEnabled(false);
 						btnR6G4.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent e) {
@@ -570,7 +624,7 @@ public class gameBoard extends JFrame {
 									btnR6G4.setBackground(Color.YELLOW);
 									break;
 								case 4:
-									btnR6G4.setBackground(brown);
+									btnR6G4.setBackground(Color.PINK);
 									break;
 								case 5:
 									btnR6G4.setBackground(Color.ORANGE);
@@ -594,6 +648,7 @@ public class gameBoard extends JFrame {
 						panel_1.add(btnR6G4);
 						
 						final JButton btnR5G1 = new JButton("");
+						btnR5G1.setBackground(Color.RED);
 						btnR5G1.setEnabled(false);
 						btnR5G1.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent e) {
@@ -611,7 +666,7 @@ public class gameBoard extends JFrame {
 									btnR5G1.setBackground(Color.YELLOW);
 									break;
 								case 4:
-									btnR5G1.setBackground(brown);
+									btnR5G1.setBackground(Color.PINK);
 									break;
 								case 5:
 									btnR5G1.setBackground(Color.ORANGE);
@@ -636,6 +691,7 @@ public class gameBoard extends JFrame {
 						panel_1.add(btnR5G1);
 						
 						final JButton btnR5G2 = new JButton("");
+						btnR5G2.setBackground(Color.RED);
 						btnR5G2.setEnabled(false);
 						btnR5G2.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent e) {
@@ -653,7 +709,7 @@ public class gameBoard extends JFrame {
 									btnR5G2.setBackground(Color.YELLOW);
 									break;
 								case 4:
-									btnR5G2.setBackground(brown);
+									btnR5G2.setBackground(Color.PINK);
 									break;
 								case 5:
 									btnR5G2.setBackground(Color.ORANGE);
@@ -677,6 +733,7 @@ public class gameBoard extends JFrame {
 						panel_1.add(btnR5G2);
 						
 						final JButton btnR5G3 = new JButton("");
+						btnR5G3.setBackground(Color.RED);
 						btnR5G3.setEnabled(false);
 						btnR5G3.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent e) {
@@ -694,7 +751,7 @@ public class gameBoard extends JFrame {
 									btnR5G3.setBackground(Color.YELLOW);
 									break;
 								case 4:
-									btnR5G3.setBackground(brown);
+									btnR5G3.setBackground(Color.PINK);
 									break;
 								case 5:
 									btnR5G3.setBackground(Color.ORANGE);
@@ -718,6 +775,7 @@ public class gameBoard extends JFrame {
 						panel_1.add(btnR5G3);
 						
 						final JButton btnR5G4 = new JButton("");
+						btnR5G4.setBackground(Color.RED);
 						btnR5G4.setEnabled(false);
 						btnR5G4.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent e) {
@@ -736,7 +794,7 @@ public class gameBoard extends JFrame {
 									btnR5G4.setBackground(Color.YELLOW);
 									break;
 								case 4:
-									btnR5G4.setBackground(brown);
+									btnR5G4.setBackground(Color.PINK);
 									break;
 								case 5:
 									btnR5G4.setBackground(Color.ORANGE);
@@ -760,6 +818,7 @@ public class gameBoard extends JFrame {
 						panel_1.add(btnR5G4);
 						
 						final JButton btnR4G1 = new JButton("");
+						btnR4G1.setBackground(Color.RED);
 						btnR4G1.setEnabled(false);
 						btnR4G1.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent e) {
@@ -777,7 +836,7 @@ public class gameBoard extends JFrame {
 									btnR4G1.setBackground(Color.YELLOW);
 									break;
 								case 4:
-									btnR4G1.setBackground(brown);
+									btnR4G1.setBackground(Color.PINK);
 									break;
 								case 5:
 									btnR4G1.setBackground(Color.ORANGE);
@@ -802,6 +861,7 @@ public class gameBoard extends JFrame {
 						panel_1.add(btnR4G1);
 						
 						final JButton btnR4G2 = new JButton("");
+						btnR4G2.setBackground(Color.RED);
 						btnR4G2.setEnabled(false);
 						btnR4G2.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent e) {
@@ -819,7 +879,7 @@ public class gameBoard extends JFrame {
 									btnR4G2.setBackground(Color.YELLOW);
 									break;
 								case 4:
-									btnR4G2.setBackground(brown);
+									btnR4G2.setBackground(Color.PINK);
 									break;
 								case 5:
 									btnR4G2.setBackground(Color.ORANGE);
@@ -843,6 +903,7 @@ public class gameBoard extends JFrame {
 						panel_1.add(btnR4G2);
 						
 						final JButton btnR4G3 = new JButton("");
+						btnR4G3.setBackground(Color.RED);
 						btnR4G3.setEnabled(false);
 						btnR4G3.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent e) {
@@ -860,7 +921,7 @@ public class gameBoard extends JFrame {
 									btnR4G3.setBackground(Color.YELLOW);
 									break;
 								case 4:
-									btnR4G3.setBackground(brown);
+									btnR4G3.setBackground(Color.PINK);
 									break;
 								case 5:
 									btnR4G3.setBackground(Color.ORANGE);
@@ -884,6 +945,7 @@ public class gameBoard extends JFrame {
 						panel_1.add(btnR4G3);
 						
 						final JButton btnR4G4 = new JButton("");
+						btnR4G4.setBackground(Color.RED);
 						btnR4G4.setEnabled(false);
 						btnR4G4.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent e) {
@@ -901,7 +963,7 @@ public class gameBoard extends JFrame {
 									btnR4G4.setBackground(Color.YELLOW);
 									break;
 								case 4:
-									btnR4G4.setBackground(brown);
+									btnR4G4.setBackground(Color.PINK);
 									break;
 								case 5:
 									btnR4G4.setBackground(Color.ORANGE);
@@ -926,6 +988,7 @@ public class gameBoard extends JFrame {
 						panel_1.add(btnR4G4);
 						
 						final JButton btnR3G1 = new JButton("");
+						btnR3G1.setBackground(Color.RED);
 						btnR3G1.setEnabled(false);
 						btnR3G1.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent e) {
@@ -943,7 +1006,7 @@ public class gameBoard extends JFrame {
 									btnR3G1.setBackground(Color.YELLOW);
 									break;
 								case 4:
-									btnR3G1.setBackground(brown);
+									btnR3G1.setBackground(Color.PINK);
 									break;
 								case 5:
 									btnR3G1.setBackground(Color.ORANGE);
@@ -968,6 +1031,7 @@ public class gameBoard extends JFrame {
 						panel_1.add(btnR3G1);
 						
 						final JButton btnR3G2 = new JButton("");
+						btnR3G2.setBackground(Color.RED);
 						btnR3G2.setEnabled(false);
 						btnR3G2.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent e) {
@@ -985,7 +1049,7 @@ public class gameBoard extends JFrame {
 									btnR3G2.setBackground(Color.YELLOW);
 									break;
 								case 4:
-									btnR3G2.setBackground(brown);
+									btnR3G2.setBackground(Color.PINK);
 									break;
 								case 5:
 									btnR3G2.setBackground(Color.ORANGE);
@@ -1009,6 +1073,7 @@ public class gameBoard extends JFrame {
 						panel_1.add(btnR3G2);
 						
 						final JButton btnR3G3 = new JButton("");
+						btnR3G3.setBackground(Color.RED);
 						btnR3G3.setEnabled(false);
 						btnR3G3.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent e) {
@@ -1026,7 +1091,7 @@ public class gameBoard extends JFrame {
 									btnR3G3.setBackground(Color.YELLOW);
 									break;
 								case 4:
-									btnR3G3.setBackground(brown);
+									btnR3G3.setBackground(Color.PINK);
 									break;
 								case 5:
 									btnR3G3.setBackground(Color.ORANGE);
@@ -1050,6 +1115,7 @@ public class gameBoard extends JFrame {
 						panel_1.add(btnR3G3);
 						
 						final JButton btnR3G4 = new JButton("");
+						btnR3G4.setBackground(Color.RED);
 						btnR3G4.setEnabled(false);
 						btnR3G4.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent e) {
@@ -1067,7 +1133,7 @@ public class gameBoard extends JFrame {
 									btnR3G4.setBackground(Color.YELLOW);
 									break;
 								case 4:
-									btnR3G4.setBackground(brown);
+									btnR3G4.setBackground(Color.PINK);
 									break;
 								case 5:
 									btnR3G4.setBackground(Color.ORANGE);
@@ -1091,6 +1157,7 @@ public class gameBoard extends JFrame {
 						panel_1.add(btnR3G4);
 						
 						final JButton btnR2G1 = new JButton("");
+						btnR2G1.setBackground(Color.RED);
 						btnR2G1.setEnabled(false);
 						btnR2G1.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent e) {
@@ -1108,7 +1175,7 @@ public class gameBoard extends JFrame {
 									btnR2G1.setBackground(Color.YELLOW);
 									break;
 								case 4:
-									btnR2G1.setBackground(brown);
+									btnR2G1.setBackground(Color.PINK);
 									break;
 								case 5:
 									btnR2G1.setBackground(Color.ORANGE);
@@ -1133,6 +1200,7 @@ public class gameBoard extends JFrame {
 						panel_1.add(btnR2G1);
 						
 						final JButton btnR2G2 = new JButton("");
+						btnR2G2.setBackground(Color.RED);
 						btnR2G2.setEnabled(false);
 						btnR2G2.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent e) {
@@ -1150,7 +1218,7 @@ public class gameBoard extends JFrame {
 									btnR2G2.setBackground(Color.YELLOW);
 									break;
 								case 4:
-									btnR2G2.setBackground(brown);
+									btnR2G2.setBackground(Color.PINK);
 									break;
 								case 5:
 									btnR2G2.setBackground(Color.ORANGE);
@@ -1174,6 +1242,7 @@ public class gameBoard extends JFrame {
 						panel_1.add(btnR2G2);
 						
 						final JButton btnR2G3 = new JButton("");
+						btnR2G3.setBackground(Color.RED);
 						btnR2G3.setEnabled(false);
 						btnR2G3.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent e) {
@@ -1191,7 +1260,7 @@ public class gameBoard extends JFrame {
 									btnR2G3.setBackground(Color.YELLOW);
 									break;
 								case 4:
-									btnR2G3.setBackground(brown);
+									btnR2G3.setBackground(Color.PINK);
 									break;
 								case 5:
 									btnR2G3.setBackground(Color.ORANGE);
@@ -1215,6 +1284,7 @@ public class gameBoard extends JFrame {
 						panel_1.add(btnR2G3);
 						
 						final JButton btnR2G4 = new JButton("");
+						btnR2G4.setBackground(Color.RED);
 						btnR2G4.setEnabled(false);
 						btnR2G4.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent e) {
@@ -1232,7 +1302,7 @@ public class gameBoard extends JFrame {
 									btnR2G4.setBackground(Color.YELLOW);
 									break;
 								case 4:
-									btnR2G4.setBackground(brown);
+									btnR2G4.setBackground(Color.PINK);
 									break;
 								case 5:
 									btnR2G4.setBackground(Color.ORANGE);
@@ -1256,6 +1326,7 @@ public class gameBoard extends JFrame {
 						panel_1.add(btnR2G4);
 						
 						final JButton btnR1G1 = new JButton("");
+						btnR1G1.setBackground(Color.RED);
 						btnR1G1.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent e) {
 								switch(guessOne){
@@ -1272,7 +1343,7 @@ public class gameBoard extends JFrame {
 									btnR1G1.setBackground(Color.YELLOW);
 									break;
 								case 4:
-									btnR1G1.setBackground(brown);
+									btnR1G1.setBackground(Color.PINK);
 									break;
 								case 5:
 									btnR1G1.setBackground(Color.ORANGE);
@@ -1298,6 +1369,7 @@ public class gameBoard extends JFrame {
 						panel_1.add(btnR1G1);
 						
 						final JButton btnR1G2 = new JButton("");
+						btnR1G2.setBackground(Color.RED);
 						btnR1G2.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent e) {
 								switch(guessTwo){
@@ -1314,7 +1386,7 @@ public class gameBoard extends JFrame {
 									btnR1G2.setBackground(Color.YELLOW);
 									break;
 								case 4:
-									btnR1G2.setBackground(brown);
+									btnR1G2.setBackground(Color.PINK);
 									break;
 								case 5:
 									btnR1G2.setBackground(Color.ORANGE);
@@ -1338,6 +1410,7 @@ public class gameBoard extends JFrame {
 						panel_1.add(btnR1G2);
 						
 						final JButton btnR1G3 = new JButton("");
+						btnR1G3.setBackground(Color.RED);
 						btnR1G3.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent e) {
 								switch(guessThree){
@@ -1354,7 +1427,7 @@ public class gameBoard extends JFrame {
 									btnR1G3.setBackground(Color.YELLOW);
 									break;
 								case 4:
-									btnR1G3.setBackground(brown);
+									btnR1G3.setBackground(Color.PINK);
 									break;
 								case 5:
 									btnR1G3.setBackground(Color.ORANGE);
@@ -1378,6 +1451,7 @@ public class gameBoard extends JFrame {
 						panel_1.add(btnR1G3);
 						
 						final JButton btnR1G4 = new JButton("");
+						btnR1G4.setBackground(Color.RED);
 						btnR1G4.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent e) {
 								switch(guessFour){
@@ -1394,7 +1468,7 @@ public class gameBoard extends JFrame {
 									btnR1G4.setBackground(Color.YELLOW);
 									break;
 								case 4:
-									btnR1G4.setBackground(brown);
+									btnR1G4.setBackground(Color.PINK);
 									break;
 								case 5:
 									btnR1G4.setBackground(Color.ORANGE);
@@ -1548,193 +1622,188 @@ public class gameBoard extends JFrame {
 						final JLabel lblR1G4 = new JLabel("");
 						lblR1G4.setBounds(362, 444, 15, 14);
 						panel_1.add(lblR1G4);
-		
-		panel = new JPanel();
-		panel.setBounds(0, 0, 434, 262);
-		contentPane.add(panel);
-		panel.setLayout(null);
-		
-		
-		
-		JLabel lblNumGames = new JLabel("How many games would you like to play?");
-		lblNumGames.setBounds(11, 75, 195, 14);
-		panel.add(lblNumGames);
-		
-		JSpinner spinner = new JSpinner();
-		spinner.setBounds(229, 72, 29, 20);
-		panel.add(spinner);
-		
-		JButton btnSubmit = new JButton("Submit");
-		
-				btnSubmit.setBounds(345, 228, 79, 23);
-				panel.add(btnSubmit);
-				
-				tbxName = new JTextField();
-				tbxName.setBounds(11, 34, 86, 20);
-				panel.add(tbxName);
-				tbxName.setColumns(10);
-				
-				JLabel lblPlayerOneName = new JLabel("Player One Name:");
-				lblPlayerOneName.setBounds(10, 9, 87, 14);
-				panel.add(lblPlayerOneName);
-				
-				btnSubmit.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						panel.setVisible(false);
-						panel_1.setVisible(true);
-						frame.setBounds(frame.getX(), frame.getY(), panel_1.getWidth(), panel_1.getHeight());
-						contentPane.setSize(panel_1.getWidth(), panel_1.getHeight());
-					}
-				});
-				
-				btnCheck.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						game = new Game();
 						
-						switch(round){
-						case 0:
-							game.setColorArray(btnR1G1, btnR1G2, btnR1G3, btnR1G4);
-							labelArray = game.checkGuess();
-							lblR1G1.setText(labelArray[0]);
-							lblR1G2.setText(labelArray[1]);
-							lblR1G3.setText(labelArray[2]);
-							lblR1G4.setText(labelArray[3]);
-							
-							btnR1G1.setEnabled(false);
-							btnR1G2.setEnabled(false);
-							btnR1G3.setEnabled(false);
-							btnR1G4.setEnabled(false);
-							
-							btnR2G1.setEnabled(true);
-							btnR2G2.setEnabled(true);
-							btnR2G3.setEnabled(true);
-							btnR2G4.setEnabled(true);
-							break;
-						case 1:
-							game.setColorArray(btnR2G1, btnR2G2, btnR2G3, btnR2G4);
-							labelArray = game.checkGuess();
-							lblR2G1.setText(labelArray[0]);
-							lblR2G2.setText(labelArray[1]);
-							lblR2G3.setText(labelArray[2]);
-							lblR2G4.setText(labelArray[3]);
-							
-							btnR2G1.setEnabled(false);
-							btnR2G2.setEnabled(false);
-							btnR2G3.setEnabled(false);
-							btnR2G4.setEnabled(false);
-							
-							btnR3G1.setEnabled(true);
-							btnR3G2.setEnabled(true);
-							btnR3G3.setEnabled(true);
-							btnR3G4.setEnabled(true);
-							break;
-						case 2:
-							game.setColorArray(btnR3G1, btnR3G2, btnR3G3, btnR3G4);
-							labelArray = game.checkGuess();
-							lblR3G1.setText(labelArray[0]);
-							lblR3G2.setText(labelArray[1]);
-							lblR3G3.setText(labelArray[2]);
-							lblR3G4.setText(labelArray[3]);
-							
-							btnR3G1.setEnabled(false);
-							btnR3G2.setEnabled(false);
-							btnR3G3.setEnabled(false);
-							btnR3G4.setEnabled(false);
-							
-							btnR4G1.setEnabled(true);
-							btnR4G2.setEnabled(true);
-							btnR4G3.setEnabled(true);
-							btnR4G4.setEnabled(true);
-							break;
-						case 3:
-							game.setColorArray(btnR4G1, btnR4G2, btnR4G3, btnR4G4);
-							labelArray = game.checkGuess();
-							lblR4G1.setText(labelArray[0]);
-							lblR4G2.setText(labelArray[1]);
-							lblR4G3.setText(labelArray[2]);
-							lblR4G4.setText(labelArray[3]);
-							
-							btnR4G1.setEnabled(false);
-							btnR4G2.setEnabled(false);
-							btnR4G3.setEnabled(false);
-							btnR4G4.setEnabled(false);
-							
-							btnR5G1.setEnabled(true);
-							btnR5G2.setEnabled(true);
-							btnR5G3.setEnabled(true);
-							btnR5G4.setEnabled(true);
-							break;
-						case 4:
-							game.setColorArray(btnR5G1, btnR5G2, btnR5G3, btnR5G4);
-							labelArray = game.checkGuess();
-							lblR5G1.setText(labelArray[0]);
-							lblR5G2.setText(labelArray[1]);
-							lblR5G3.setText(labelArray[2]);
-							lblR5G4.setText(labelArray[3]);
-							
-							btnR5G1.setEnabled(false);
-							btnR5G2.setEnabled(false);
-							btnR5G3.setEnabled(false);
-							btnR5G4.setEnabled(false);
-							
-							btnR6G1.setEnabled(true);
-							btnR6G2.setEnabled(true);
-							btnR6G3.setEnabled(true);
-							btnR6G4.setEnabled(true);
-							break;
-						case 5:
-							game.setColorArray(btnR6G1, btnR6G2, btnR6G3, btnR6G4);
-							labelArray = game.checkGuess();
-							lblR6G1.setText(labelArray[0]);
-							lblR6G2.setText(labelArray[1]);
-							lblR6G3.setText(labelArray[2]);
-							lblR6G4.setText(labelArray[3]);
-							
-							btnR6G1.setEnabled(false);
-							btnR6G2.setEnabled(false);
-							btnR6G3.setEnabled(false);
-							btnR6G4.setEnabled(false);
-							
-							btnR7G1.setEnabled(true);
-							btnR7G2.setEnabled(true);
-							btnR7G3.setEnabled(true);
-							btnR7G4.setEnabled(true);
-							break;
-						case 6:
-							game.setColorArray(btnR7G1, btnR7G2, btnR7G3, btnR7G4);
-							labelArray = game.checkGuess();
-							lblR7G1.setText(labelArray[0]);
-							lblR7G2.setText(labelArray[1]);
-							lblR7G3.setText(labelArray[2]);
-							lblR7G4.setText(labelArray[3]);
-							
-							btnR7G1.setEnabled(false);
-							btnR7G2.setEnabled(false);
-							btnR7G3.setEnabled(false);
-							btnR7G4.setEnabled(false);
-							
-							btnR8G1.setEnabled(true);
-							btnR8G2.setEnabled(true);
-							btnR8G3.setEnabled(true);
-							btnR8G4.setEnabled(true);
-							break;
-						default:
-							game.setColorArray(btnR8G1, btnR8G2, btnR8G3, btnR8G4);
-							labelArray = game.checkGuess();
-							lblR8G1.setText(labelArray[0]);
-							lblR8G2.setText(labelArray[1]);
-							lblR8G3.setText(labelArray[2]);
-							lblR8G4.setText(labelArray[3]);
-							
-							btnR8G1.setEnabled(false);
-							btnR8G2.setEnabled(false);
-							btnR8G3.setEnabled(false);
-							btnR8G4.setEnabled(false);
+						btnCheck.addActionListener(new ActionListener() {
+							public void actionPerformed(ActionEvent e) {
 								
-						}
-						round += 1;
-					}
-				});
+								switch(round){
+								case 0:
+									
+									game.setColorArray(btnR1G1, btnR1G2, btnR1G3, btnR1G4);
+									labelArray = game.checkGuess();
+									lblR1G1.setText(labelArray[0]);
+									lblR1G2.setText(labelArray[1]);
+									lblR1G3.setText(labelArray[2]);
+									lblR1G4.setText(labelArray[3]);
+									
+									btnR1G1.setEnabled(false);
+									btnR1G2.setEnabled(false);
+									btnR1G3.setEnabled(false);
+									btnR1G4.setEnabled(false);
+									
+									btnR2G1.setEnabled(true);
+									btnR2G2.setEnabled(true);
+									btnR2G3.setEnabled(true);
+									btnR2G4.setEnabled(true);
+									
+									break;
+								case 1:
+									game.setColorArray(btnR2G1, btnR2G2, btnR2G3, btnR2G4);
+									labelArray = game.checkGuess();
+									lblR2G1.setText(labelArray[0]);
+									lblR2G2.setText(labelArray[1]);
+									lblR2G3.setText(labelArray[2]);
+									lblR2G4.setText(labelArray[3]);
+									
+									btnR2G1.setEnabled(false);
+									btnR2G2.setEnabled(false);
+									btnR2G3.setEnabled(false);
+									btnR2G4.setEnabled(false);
+									
+									btnR3G1.setEnabled(true);
+									btnR3G2.setEnabled(true);
+									btnR3G3.setEnabled(true);
+									btnR3G4.setEnabled(true);
+									break;
+								case 2:
+									game.setColorArray(btnR3G1, btnR3G2, btnR3G3, btnR3G4);
+									labelArray = game.checkGuess();
+									lblR3G1.setText(labelArray[0]);
+									lblR3G2.setText(labelArray[1]);
+									lblR3G3.setText(labelArray[2]);
+									lblR3G4.setText(labelArray[3]);
+									
+									btnR3G1.setEnabled(false);
+									btnR3G2.setEnabled(false);
+									btnR3G3.setEnabled(false);
+									btnR3G4.setEnabled(false);
+									
+									btnR4G1.setEnabled(true);
+									btnR4G2.setEnabled(true);
+									btnR4G3.setEnabled(true);
+									btnR4G4.setEnabled(true);
+									break;
+								case 3:
+									game.setColorArray(btnR4G1, btnR4G2, btnR4G3, btnR4G4);
+									labelArray = game.checkGuess();
+									lblR4G1.setText(labelArray[0]);
+									lblR4G2.setText(labelArray[1]);
+									lblR4G3.setText(labelArray[2]);
+									lblR4G4.setText(labelArray[3]);
+									
+									btnR4G1.setEnabled(false);
+									btnR4G2.setEnabled(false);
+									btnR4G3.setEnabled(false);
+									btnR4G4.setEnabled(false);
+									
+									btnR5G1.setEnabled(true);
+									btnR5G2.setEnabled(true);
+									btnR5G3.setEnabled(true);
+									btnR5G4.setEnabled(true);
+									break;
+								case 4:
+									game.setColorArray(btnR5G1, btnR5G2, btnR5G3, btnR5G4);
+									labelArray = game.checkGuess();
+									lblR5G1.setText(labelArray[0]);
+									lblR5G2.setText(labelArray[1]);
+									lblR5G3.setText(labelArray[2]);
+									lblR5G4.setText(labelArray[3]);
+									
+									btnR5G1.setEnabled(false);
+									btnR5G2.setEnabled(false);
+									btnR5G3.setEnabled(false);
+									btnR5G4.setEnabled(false);
+									
+									btnR6G1.setEnabled(true);
+									btnR6G2.setEnabled(true);
+									btnR6G3.setEnabled(true);
+									btnR6G4.setEnabled(true);
+									break;
+								case 5:
+									game.setColorArray(btnR6G1, btnR6G2, btnR6G3, btnR6G4);
+									labelArray = game.checkGuess();
+									lblR6G1.setText(labelArray[0]);
+									lblR6G2.setText(labelArray[1]);
+									lblR6G3.setText(labelArray[2]);
+									lblR6G4.setText(labelArray[3]);
+									
+									btnR6G1.setEnabled(false);
+									btnR6G2.setEnabled(false);
+									btnR6G3.setEnabled(false);
+									btnR6G4.setEnabled(false);
+									
+									btnR7G1.setEnabled(true);
+									btnR7G2.setEnabled(true);
+									btnR7G3.setEnabled(true);
+									btnR7G4.setEnabled(true);
+									break;
+								case 6:
+									game.setColorArray(btnR7G1, btnR7G2, btnR7G3, btnR7G4);
+									labelArray = game.checkGuess();
+									lblR7G1.setText(labelArray[0]);
+									lblR7G2.setText(labelArray[1]);
+									lblR7G3.setText(labelArray[2]);
+									lblR7G4.setText(labelArray[3]);
+									
+									btnR7G1.setEnabled(false);
+									btnR7G2.setEnabled(false);
+									btnR7G3.setEnabled(false);
+									btnR7G4.setEnabled(false);
+									
+									btnR8G1.setEnabled(true);
+									btnR8G2.setEnabled(true);
+									btnR8G3.setEnabled(true);
+									btnR8G4.setEnabled(true);
+									break;
+								default:
+									game.setColorArray(btnR8G1, btnR8G2, btnR8G3, btnR8G4);
+									labelArray = game.checkGuess();
+									lblR8G1.setText(labelArray[0]);
+									lblR8G2.setText(labelArray[1]);
+									lblR8G3.setText(labelArray[2]);
+									lblR8G4.setText(labelArray[3]);
+									
+									btnR8G1.setEnabled(false);
+									btnR8G2.setEnabled(false);
+									btnR8G3.setEnabled(false);
+									btnR8G4.setEnabled(false);
+									
+										
+								}
+								round += 1;
+								if (game.checkWin() == true){
+									game.incrementNumWins();
+									JButton[] buttonArray = {btnR1G1, btnR1G2, btnR1G3, btnR1G4, btnR2G1, btnR2G2, btnR2G3, btnR2G4, btnR3G1, btnR3G2, btnR3G3, btnR3G4, btnR4G1, btnR4G2, btnR4G3, btnR4G4, btnR5G1, btnR5G2, btnR5G3, btnR5G4, btnR6G1, btnR6G2, btnR6G3, btnR6G4, btnR7G1, btnR7G2, btnR7G3, btnR7G4, btnR8G1, btnR8G2, btnR8G3, btnR8G4,};
+									JButton[] answerArray = {btnChoosen1, btnChoosen2, btnChoosen3, btnChoosen4};
+									JLabel[] labelArray = {lblR1G1, lblR1G2, lblR1G3, lblR1G4, lblR2G1, lblR2G2, lblR2G3, lblR2G4, lblR3G1, lblR3G2, lblR3G3, lblR3G4, lblR4G1, lblR4G2, lblR4G3, lblR4G4, lblR5G1, lblR5G2, lblR5G3, lblR5G4, lblR6G1, lblR6G2, lblR6G3, lblR6G4, lblR7G1, lblR7G2, lblR7G3, lblR7G4, lblR8G1, lblR8G2, lblR8G3, lblR8G4};
+									game.resetGame(buttonArray, answerArray, labelArray);
+									round = 0;
+								}
+								guessOne = 0;
+								guessTwo = 0;
+								guessThree = 0;
+								guessFour = 0;
+								
+								
+								if(round == 8){
+									game.showAnswer(btnChoosen1, btnChoosen2, btnChoosen3, btnChoosen4);
+									game.incrementCurrentGame();
+									
+									
+								}
+								if(round == 9){
+									JButton[] buttonArray = {btnR1G1, btnR1G2, btnR1G3, btnR1G4, btnR2G1, btnR2G2, btnR2G3, btnR2G4, btnR3G1, btnR3G2, btnR3G3, btnR3G4, btnR4G1, btnR4G2, btnR4G3, btnR4G4, btnR5G1, btnR5G2, btnR5G3, btnR5G4, btnR6G1, btnR6G2, btnR6G3, btnR6G4, btnR7G1, btnR7G2, btnR7G3, btnR7G4, btnR8G1, btnR8G2, btnR8G3, btnR8G4,};
+									JButton[] answerArray = {btnChoosen1, btnChoosen2, btnChoosen3, btnChoosen4};
+									JLabel[] labelArray = {lblR1G1, lblR1G2, lblR1G3, lblR1G4, lblR2G1, lblR2G2, lblR2G3, lblR2G4, lblR3G1, lblR3G2, lblR3G3, lblR3G4, lblR4G1, lblR4G2, lblR4G3, lblR4G4, lblR5G1, lblR5G2, lblR5G3, lblR5G4, lblR6G1, lblR6G2, lblR6G3, lblR6G4, lblR7G1, lblR7G2, lblR7G3, lblR7G4, lblR8G1, lblR8G2, lblR8G3, lblR8G4};
+									game.resetGame(buttonArray, answerArray, labelArray);
+									round = 0;
+								}
+								if(game.getNumGames() <= game.getCurrentGame()){
+									game.finishGame();
+								}
+								
+							}
+						});
 
 				
 	}
