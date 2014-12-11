@@ -26,7 +26,7 @@ public class Game {
 	
 
 
-	
+	//Getters and setters
 	public void incrementCurrentGame(){
 		currentGame += 1;
 	}
@@ -55,14 +55,17 @@ public class Game {
 	public void setPlayerName(String playerName) {
 		this.playerName = playerName;
 	}
+	
+	//main method
 	public Game(){
 		
+		//making random colors for the answers
 		correctColor1 = r.nextInt(7);
 		correctColor2 = r.nextInt(7);
 		correctColor3 = r.nextInt(7);
 		correctColor4 = r.nextInt(7);
 		
-		
+		//putting answers into an array of Colors
 		setCorrectColorArray(correctColor1, 0);
 		setCorrectColorArray(correctColor2, 1);
 		setCorrectColorArray(correctColor3, 2);
@@ -71,6 +74,7 @@ public class Game {
 		
 	}
 	
+	//change answer for the next round
 	public void setCorrectColors(){
 	
 		correctColor1 = r.nextInt(7);
@@ -85,12 +89,15 @@ public class Game {
 		setCorrectColorArray(correctColor4, 3);
 	}
 	
+	//takes in the user chosen colors and puts them into an array of colors
 	public void setColorArray(JButton btn1, JButton btn2, JButton btn3, JButton btn4){
 		colors[0] = btn1.getBackground();
 		colors[1] = btn2.getBackground();
 		colors[2] = btn3.getBackground();
 		colors[3] = btn4.getBackground();
 	}
+	
+	//takes in the random int and index and and assigns a color to the int in that index
 	public void setCorrectColorArray(int color, int index){
 		
 		switch(color){
@@ -121,6 +128,7 @@ public class Game {
 		}
 	}
 	
+	//checks the user guess against the correct colors
 	public String[] checkGuess(){
 		int restartPoint=0;
 		int gCol1=0;
@@ -141,10 +149,12 @@ public class Game {
 		int aCol7=0;
 		int aCol8=0;
 		int numO=0;
+		//used for testing 
 		System.out.println(correctColors[0]);
 		System.out.println(correctColors[1]);
 		System.out.println(correctColors[2]);
 		System.out.println(correctColors[3]);
+		
 		for (int i = 0; i < 4; i++){
 
 			labelArray[i] = "X";
@@ -211,17 +221,13 @@ public class Game {
 			labelArray[i]="!";
 
 		}
-		
-		
-		
-		
-		
 
 		shuffleArray(labelArray);
 		return labelArray;
 		
 	}
-
+	
+	// shuffles the array
 	  static void shuffleArray(String[] ar)
 	  {
 	    Random rnd = new Random();
@@ -235,12 +241,14 @@ public class Game {
 	    }
 	  }
 	  
+	  //resets the array
 	  public void resetArray(String[] array){
 		  for (int i = 0; i < array.length; i++){
 			  array[i] = "X";
 		  }
 	  }
 	  
+	  //shows the win message if they win
 	  public void finishGame(){
 		 
 			  
@@ -249,6 +257,7 @@ public class Game {
 		  
 	  }
 	  
+	  //shows the correct answer
 	  public void showAnswer(JButton btn1, JButton btn2, JButton btn3, JButton btn4){
 		  btn1.setBackground(correctColors[0]);
 		  btn2.setBackground(correctColors[1]);
@@ -256,6 +265,7 @@ public class Game {
 		  btn4.setBackground(correctColors[3]);
 	  }
 	  
+	  //checks if the player has won
 	  public Boolean checkWin(){
 		  int correct = 0;
 		  for (int x = 0; x < 4; x++){
@@ -274,6 +284,7 @@ public class Game {
 		  
 	  }
 	  
+	  //resets the game
 	  public void resetGame(JButton[] array, JButton[] answerArray, JLabel[] labels){
 		  
 		  setCorrectColors();

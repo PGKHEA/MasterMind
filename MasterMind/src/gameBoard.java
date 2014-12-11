@@ -80,12 +80,12 @@ public class gameBoard extends JFrame {
 				
 				
 				JLabel lblNumGames = new JLabel("How many games would you like to play?");
-				lblNumGames.setBounds(11, 75, 195, 14);
+				lblNumGames.setBounds(11, 75, 245, 14);
 				panel.add(lblNumGames);
 				
 				final JSpinner spinner = new JSpinner();
 				spinner.setModel(new SpinnerNumberModel(1, 1, 10, 1));
-				spinner.setBounds(229, 72, 29, 20);
+				spinner.setBounds(277, 72, 29, 20);
 				panel.add(spinner);
 				
 				JButton btnSubmit = new JButton("Submit");
@@ -99,7 +99,7 @@ public class gameBoard extends JFrame {
 						tbxName.setColumns(10);
 						
 						JLabel lblPlayerOneName = new JLabel("Player One Name:");
-						lblPlayerOneName.setBounds(10, 9, 87, 14);
+						lblPlayerOneName.setBounds(10, 9, 110, 14);
 						panel.add(lblPlayerOneName);
 						
 						btnSubmit.addActionListener(new ActionListener() {
