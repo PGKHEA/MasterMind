@@ -25,7 +25,7 @@ public class Game {
 	private int numCWP;
 	
 
-	private int restartPoint=0;
+
 	
 	public void incrementCurrentGame(){
 		currentGame += 1;
@@ -122,6 +122,7 @@ public class Game {
 	}
 	
 	public String[] checkGuess(){
+		int restartPoint=0;
 		int gCol1=0;
 		 int gCol2=0;
 		 int gCol3=0;
@@ -204,37 +205,18 @@ public class Game {
 				Math.min(gCol5, aCol5) + Math.min(gCol6, aCol6) + Math.min(gCol7, aCol7) +Math.min(gCol8, aCol8);
 		
 		int totalCWP = totalCorrectish-numO;
-			
-		for(int i=restartPoint;i<totalCWP;i++){
+		int count=0;
+		for(int i=restartPoint;i<restartPoint+totalCWP;i++){
+
 			labelArray[i]="!";
+
 		}
 		
 		
 		
 		
 		
-//		for(int x = 0; x < 4; x++){
-//			for(int y = x; y < 4; y++){
-//				if(colors[x] == correctColors[y]){
-//					if( x == y){
-//						labelArray[x] = "O";
-//						break;
-//					}
-//					
-//					else{
-//						labelArray[x] = "!";
-//						break;
-//					}
-//				}
-//			}
-//
-//		}
-		
-//		for(int x = 0; x < 4; x++){
-//			if(colors[x] == correctColors[x]){
-//				labelArray[x] = "O";
-//			}
-//		}
+
 		shuffleArray(labelArray);
 		return labelArray;
 		

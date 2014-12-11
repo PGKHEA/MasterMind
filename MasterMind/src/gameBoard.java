@@ -1773,6 +1773,7 @@ public class gameBoard extends JFrame {
 								round += 1;
 								if (game.checkWin() == true){
 									game.incrementNumWins();
+									game.incrementCurrentGame();
 									JButton[] buttonArray = {btnR1G1, btnR1G2, btnR1G3, btnR1G4, btnR2G1, btnR2G2, btnR2G3, btnR2G4, btnR3G1, btnR3G2, btnR3G3, btnR3G4, btnR4G1, btnR4G2, btnR4G3, btnR4G4, btnR5G1, btnR5G2, btnR5G3, btnR5G4, btnR6G1, btnR6G2, btnR6G3, btnR6G4, btnR7G1, btnR7G2, btnR7G3, btnR7G4, btnR8G1, btnR8G2, btnR8G3, btnR8G4,};
 									JButton[] answerArray = {btnChoosen1, btnChoosen2, btnChoosen3, btnChoosen4};
 									JLabel[] labelArray = {lblR1G1, lblR1G2, lblR1G3, lblR1G4, lblR2G1, lblR2G2, lblR2G3, lblR2G4, lblR3G1, lblR3G2, lblR3G3, lblR3G4, lblR4G1, lblR4G2, lblR4G3, lblR4G4, lblR5G1, lblR5G2, lblR5G3, lblR5G4, lblR6G1, lblR6G2, lblR6G3, lblR6G4, lblR7G1, lblR7G2, lblR7G3, lblR7G4, lblR8G1, lblR8G2, lblR8G3, lblR8G4};
